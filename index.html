@@ -31,13 +31,24 @@
         <div> Duration </div>
         </div>
         <div class="song-list">
-        <div class="song">
-        <span class="song-name"></span>
-        <span class="song-artist"></span>
+        <div class="song" id="song1">
+        <span  class="song-name"></span>
+       <!--- <span class="song-artist"></span>
         <span class="song-album"></span>
-        <span class="song-length"></span>
+        <span class="song-length"></span>--->
         </div>
-        </div>
+				 
+		<div class="song" id="song2">
+		<span class="song-name"> </span>
+		</div>
+		<div class="song" id="song3">
+		<span  class="song-name"> </span>
+		</div>
+		<div class="song"id="song4" >
+		<span class="song-name"> </span>
+		  </div>
+		  </div> 
+          
             </section>
             <footer>
                 <div class="controls">
@@ -58,6 +69,25 @@
     <script src="jquery.js">
     </script>
     <script>
+	
+	function fancyTimeFormat(time)
+{   
+    // Hours, minutes and seconds
+    var hrs = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = time % 60;
+
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+}
 	
 	
 	/*Humne ek function bnaya, 
@@ -83,11 +113,46 @@
 			var song = document.querySelector('audio');
 			//console.log(song.currentTime);
 			//console.log(song.duration);
+			var currentTime = Math.floor(song.currentTime);
+			/*we call the function called 'fancyTimeFormat'
+			We pass it the currentTime
+			Whatever value it returns,
+			we catch it in the same variable*/
+			currentTime = fancyTimeFormat(currentTime);
+			var duration = Math.floor(song.duration);
+			duration = fancyTimeFormat(duration)
+			$('.time-elapsed').text(currentTime);
+			$('.song-duration').text(duration);
+
 			}
 /*This means, 1. Wait for the website to load
 2. Once it has loaded, run everything that is in the function
 time will be  updated after every 1 second*/
 			window.onload = function() {
+			
+			
+			//var songName1 = 'Tamma Song';
+			//var songName2 = 'Humma Song';
+			//var songName3 = 'Nashe Si Chadh Gayi';
+			//var songName4 = 'The Breakup Song';
+			/*humne ek array bnaya
+			ab humein baar baar
+			variable ko define nhi krna pdega
+			ek variable me sari information dal di*/
+			 var songList = ['Tamma song',
+			'Humma Song', 'Nashe Si Chadh Gayi', 'The Breakup Song']; 
+			 var fileNames = ['song1.mp3','song2.mp3','song3.mp3','song4.mp3'];
+			$('#song1 .song-name').text(songList[0]);
+			$('#song2 .song-name').text(songList[1]);
+			$('#song3 .song-name').text(songList[2]);
+			$('#song4 .song-name').text(songList[3]);
+			
+			$('#song1').click(function() {
+			var audio = document.querySelector('audio');
+			audio.src = fileNames[0];
+			audio.play();
+			});
+			}
 /* as soon as our website is loaded, 
 updateCurrentTime runs and 
 then after every 1 second, 
@@ -96,9 +161,9 @@ setInterval makes it run again*/
 			setInterval(function() {
 			updateCurrentTime();
 			},1000);
-			}
-
-
+			
+			
+			
 
 	/* jquery ne kisi tag ki welcome-screen
 	ke andar kisi button class ko dhundha aur uspe on click 
