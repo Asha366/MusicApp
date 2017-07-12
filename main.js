@@ -38,6 +38,12 @@
 		}
 		}
 		
+		function changeCurrentSongDetails(songObj) {
+			 $('.current-song-image').attr('src','img/' + songObj.image)
+				$('.current-song-name').text(songObj.name)
+				$('.current-song-album').text(songObj.album)
+			}
+		
 		function updateCurrentTime() {
 			var song = document.querySelector('audio');
 			//console.log(song.currentTime);
@@ -55,7 +61,8 @@
 
 			}
 			
-			function addSongNameClickEvent(songName,position) {
+			function addSongNameClickEvent(songObj,position) {
+			 var songName = songObj.fileName; // New Variable 
 				var id = '#song' + position;
 			$(id).click(function() {
 			var audio = document.querySelector('audio');
@@ -67,6 +74,7 @@
 			else {
 			audio.src = songName;
 			toggleSong();
+			 changeCurrentSongDetails(songObj); // Function Call
 			}
 			
 			});
@@ -99,28 +107,48 @@ time will be  updated after every 1 second*/
         'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
         'album': 'Badrinath ki Dulhania',
         'duration': '2:56',
-       'fileName': 'song1.mp3'
+       'fileName': 'song1.mp3',
+	   		'image': 'song1.jpg'
     },
     {
         'name': 'Humma Song',
         'artist': 'Badshah, Jubin Nautiyal, Shashaa Tirupati',
         'album': 'Ok Jaanu',
         'duration': '3:15',
-        'fileName': 'song2.mp3'
+        'fileName': 'song2.mp3',
+		'image': 'song2.jpg'
     },
     {
         'name': 'Nashe Si Chadh Gayi',
         'artist': 'Arijit Singh',
         'album': 'Befikre',
         'duration': '2:34',
-        'fileName': 'song3.mp3'
+        'fileName': 'song3.mp3',
+		'image': 'song3.jpg'
     },
     {
         'name': 'The Breakup Song',
         'artist': 'Nakash Aziz, Arijit Singh, Badshah, Jonita Gandhi',
         'album': 'Ae Dil Hai Mushkil',
         'duration': '2:29',
-        'fileName': 'song4.mp3'
+        'fileName': 'song4.mp3',
+		'image': 'song4.jpg'
+    },
+	{
+        'name': 'Tu jo mila',
+        'artist': 'Kk',
+        'album': 'Bajrangi Bhaijaan',
+        'duration': '4:04',
+        'fileName': 'song5.mp3',
+		'image': 'song5.jpg'
+    },
+	{
+        'name': 'Ishq Mubarak',
+        'artist': 'Arijit Singh, Kanwaljit Singh,Aditya seal',
+        'album': 'Tum Bin 2',
+        'duration': '4:57',
+        'fileName': 'song6.mp3',
+		'image': 'song6.jpg'
     }]
 	
 	
@@ -159,7 +187,7 @@ setInterval makes it run again*/
         song.find('.song-artist').text(obj.artist);
         song.find('.song-album').text(obj.album);
         song.find('.song-length').text(obj.duration);
-        addSongNameClickEvent(obj.fileName,i+1);
+        addSongNameClickEvent(obj,i+1);
     }
 			
 			
