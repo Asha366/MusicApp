@@ -1,108 +1,13 @@
 
-	function fancyTimeFormat(time)
-{   
-    // Hours, minutes and seconds
-    var hrs = ~~(time / 3600);
-    var mins = ~~((time % 3600) / 60);
-    var secs = time % 60;
 
-    // Output like "1:01" or "4:03:59" or "123:03:59"
-    var ret = "";
 
-    if (hrs > 0) {
-        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-    }
-
-    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-    ret += "" + secs;
-    return ret;
-}
-	
-	
-	/*Humne ek function bnaya, 
-	usme code likha,ab jab  bi humein same code ki jarurat kahin pdegi
-	to hum sidhe function ko call krenge*/
-	function toggleSong() {
-		var song = document.querySelector('audio');
-		//== will compare the both sides
-		if(song.paused == true) {
-		//console also used to debug the code
-		console.log('Playing');
-		$('.play-icon').removeClass('fa-play').addClass('fa-pause');
-		song.play();
-		}
-		else {
-		console.log('Pausing');
-		$('.play-icon').removeClass('fa-pause').addClass('fa-play');
-		song.pause();
-		}
-		}
-		
-		function changeCurrentSongDetails(songObj) {
-			 $('.current-song-image').attr('src','img/' + songObj.image)
-				$('.current-song-name').text(songObj.name)
-				$('.current-song-album').text(songObj.album)
-			}
-		
-		function updateCurrentTime() {
-			var song = document.querySelector('audio');
-			//console.log(song.currentTime);
-			//console.log(song.duration);
-			var currentTime = Math.floor(song.currentTime);
-			/*we call the function called 'fancyTimeFormat'
-			We pass it the currentTime
-			Whatever value it returns,
-			we catch it in the same variable*/
-			currentTime = fancyTimeFormat(currentTime);
-			var duration = Math.floor(song.duration);
-			duration = fancyTimeFormat(duration)
-			$('.time-elapsed').text(currentTime);
-			$('.song-duration').text(duration);
-
-			}
-			
-			function addSongNameClickEvent(songObj,position) {
-			 var songName = songObj.fileName; // New Variable 
-				var id = '#song' + position;
-			$(id).click(function() {
-			var audio = document.querySelector('audio');
-			var currentSong = audio.src;
-			if(currentSong.search(songName) != -1)
-			{
-			toggleSong();
-			}
-			else {
-			audio.src = songName;
-			toggleSong();
-			 changeCurrentSongDetails(songObj); // Function Call
-			}
-			
-			});
-			}
-			
+var currentSongNumber = 1;
+var willLoop = 0;
+var willShuffle = 0; // will use this soon
 
 
 
-/*This means, 1. Wait for the website to load
-2. Once it has loaded, run everything that is in the function
-time will be  updated after every 1 second*/
-			window.onload = function() {
-			updateCurrentTime();
-			setInterval(function(){
-			updateCurrentTime();
-			},1000);
-			
-			
-			//var songName1 = 'Tamma Song';
-			//var songName2 = 'Humma Song';
-			//var songName3 = 'Nashe Si Chadh Gayi';
-			//var songName4 = 'The Breakup Song';
-			/*humne ek array bnaya
-			ab humein baar baar
-			variable ko define nhi krna pdega
-			ek variable me sari information dal di*/
-			
-			 var songs = [{
+ var songs = [{
         'name': 'Tamma Tamma Again',
         'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
         'album': 'Badrinath ki Dulhania',
@@ -150,6 +55,148 @@ time will be  updated after every 1 second*/
         'fileName': 'song6.mp3',
 		'image': 'song6.jpg'
     }]
+
+
+
+	function fancyTimeFormat(time)
+{   
+    // Hours, minutes and seconds
+    var hrs = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = time % 60;
+
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+}
+	
+	
+	/*Humne ek function bnaya, 
+	usme code likha,ab jab  bi humein same code ki jarurat kahin pdegi
+	to hum sidhe function ko call krenge*/
+	function toggleSong() {
+		var song = document.querySelector('audio');
+		//== will compare the both sides
+		if(song.paused == true) {
+		//console also used to debug the code
+		console.log('Playing');
+		$('.play-icon').removeClass('fa-play').addClass('fa-pause');
+		song.play();
+		}
+		else {
+		console.log('Pausing');
+		$('.play-icon').removeClass('fa-pause').addClass('fa-play');
+		song.pause();
+		}
+		}
+		
+		function changeCurrentSongDetails(songObj) {
+    $('.current-song-image').attr('src','img/' + songObj.image)
+    $('.current-song-name').text(songObj.name)
+    $('.current-song-album').text(songObj.album)
+		}
+		function updateCurrentTime() {
+			var song = document.querySelector('audio');
+			//console.log(song.currentTime);
+			//console.log(song.duration);
+			var currentTime = Math.floor(song.currentTime);
+			/*we call the function called 'fancyTimeFormat'
+			We pass it the currentTime
+			Whatever value it returns,
+			we catch it in the same variable*/
+			currentTime = fancyTimeFormat(currentTime);
+			var duration = Math.floor(song.duration);
+			duration = fancyTimeFormat(duration)
+			$('.time-elapsed').text(currentTime);
+			$('.song-duration').text(duration);
+
+			}
+			
+			function addSongNameClickEvent(songObj,position) {
+			 var songName = songObj.fileName; // New Variable
+				var id = '#song' + position;
+			$(id).click(function() {
+			var audio = document.querySelector('audio');
+			var currentSong = audio.src;
+			if(currentSong.search(songName) != -1)
+			{
+			toggleSong();
+			}
+			else {
+			audio.src = songName;
+			toggleSong();
+			  changeCurrentSongDetails(songObj); // Function Call
+			}
+			
+			});
+			}
+			
+
+
+
+/*This means, 1. Wait for the website to load
+2. Once it has loaded, run everything that is in the function
+time will be  updated after every 1 second*/
+			window.onload = function() {
+
+			changeCurrentSongDetails(songs[1]);
+			
+			updateCurrentTime();
+			setInterval(function(){
+			updateCurrentTime();
+			},1000);
+			
+			
+			
+			
+			$('#songs').DataTable({
+        paging: false
+			});
+			}
+			
+			$('.fa-repeat').on('click',function() {
+         $('.fa-repeat').toggleClass('disabled')
+        willLoop = 1 - willLoop;
+            });
+			
+			$('.fa-random').on('click',function() {
+         $('.fa-random').toggleClass('disabled')
+         willShuffle = 1 - willShuffle;
+           });
+		   
+		  $('audio').on('ended',function() {
+    var audio = document.querySelector('audio');
+    if(currentSongNumber < 4) {
+        var nextSongObj = songs[currentSongNumber];
+        audio.src = nextSongObj.fileName; // Change Soure
+        toggleSong(); // Play Next Song
+        changeCurrentSongDetails(nextSongObj); // Update Image
+        currentSongNumber = currentSongNumber + 1; // Change State
+    }
+    else {
+        $('.play-icon').removeClass('fa-pause').addClass('fa-play');
+        audio.currentTime = 0;
+    }
+})
+			
+			
+			//var songName1 = 'Tamma Song';
+			//var songName2 = 'Humma Song';
+			//var songName3 = 'Nashe Si Chadh Gayi';
+			//var songName4 = 'The Breakup Song';
+			/*humne ek array bnaya
+			ab humein baar baar
+			variable ko define nhi krna pdega
+			ek variable me sari information dal di*/
+			
+			
 	
 	
 	
@@ -187,7 +234,7 @@ setInterval makes it run again*/
         song.find('.song-artist').text(obj.artist);
         song.find('.song-album').text(obj.album);
         song.find('.song-length').text(obj.duration);
-        addSongNameClickEvent(obj,i+1);
+       addSongNameClickEvent(obj,i+1)
     }
 			
 			
@@ -224,12 +271,18 @@ setInterval makes it run again*/
 	/*jQuery ne puri body pe keypress event lgaya
 	jis se ab space dbane pe bhi gana play or 
 	pause ho skta hai*/
-         $('body').on('keypress', function(event) {
+        /* $('body').on('keypress', function(event) {
 	//keycode of space bar in javascript is 32
                 if (event.keyCode == 32) {
                   toggleSong();   
 				  
             }
-			});
+			}); */
+		$('body').on('keypress',function(event) {
+			var target = event.target;
+			if (event.keyCode == 32 && target.tagName !='INPUT')
+			{
+				toggleSong();
 			}
+				});	
 			
