@@ -13,6 +13,8 @@ body {
     font-size: 16px;
 }
 
+
+
 h1 {
     border: 0;
     margin: 0;
@@ -32,6 +34,7 @@ h1 {
     justify-content: center;
     align-items: center;
 }
+
 
 .main {
     width: 100%;
@@ -114,6 +117,7 @@ h1 {
 .main .content {
     width: 800px;
     margin: 2rem auto;
+	
 }
 
 .list-headers {
@@ -159,7 +163,9 @@ h1 {
 .song-list .song:hover {
     background-color: #282828;
 }
-
+.border {
+    border: 3px solid red;
+	}
 
 .song-length {
     text-align: right;
@@ -203,6 +209,11 @@ table.dataTable tbody tr {
     width: 400px;
     margin-bottom: 1rem;
     font-size: 16px;
+	border-radius: 10px;
+}
+input:focus {
+    outline:none !important;
+	
 }
         
 .player-buttons .fa {
