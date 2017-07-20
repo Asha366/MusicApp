@@ -247,6 +247,7 @@ $('.welcome-screen button').on('click', function() {
         $('.main .user-name').text(message);
         $('.welcome-screen').addClass('hidden');
         $('.main').removeClass('hidden');
+		// $('.effct').removeClass('hidden');
     } else {
         $('#name-input').addClass('error');
     }
@@ -254,15 +255,22 @@ $('.welcome-screen button').on('click', function() {
 
 
 
-/*$('.main button').on('click', function() {
+ $ ('.content button').on('click', function() {
   
-        $('.main').addClass('hidden');
-        $('.audio-effects').removeClass('hidden');
+        $('.content').addClass('hidden');
+        $('.effct').removeClass('hidden');
+		$('.button').addClass('hidden');
      
- })*/
+ })
 
 
-
+ $ ('.effct button').on('click', function() {
+  
+        $('.effct').addClass('hidden');
+        $('.content').removeClass('hidden');
+		
+     
+ })
 
 
 
