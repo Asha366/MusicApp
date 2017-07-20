@@ -253,6 +253,24 @@ $('.welcome-screen button').on('click', function() {
 });
 
 
+
+/*$('.main button').on('click', function() {
+  
+        $('.main').addClass('hidden');
+        $('.audio-effects').removeClass('hidden');
+     
+ })*/
+
+
+
+
+
+
+
+
+
+
+
 $('.play-icon').on('click', function() {
    toggleSong();
 });
@@ -264,3 +282,10 @@ $('body').on('keypress', function(event) {
                 toggleSong();
             }
         });
+		
+		
+		
+		
+		
+		
+		
